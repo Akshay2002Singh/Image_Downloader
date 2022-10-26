@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            padding: 0px 0px;
+            margin: 0px 0px;
+            box-sizing: border-box;
+            /* border: 1px solid red; */
+        }
+
+        #main_box {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowwrap;
+        }
+
+        .child {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            font-size: xx-large;
+            font-weight: bolder;
+            padding: 15px 0px;
+            margin: auto;
+            flex-wrap: nowrap;
+        }
+
+        .grand_child {
+            padding: 0px 10px;
+            align-items: center;
+        }
+
+        input {
+            height: 40px;
+            margin-left: 9px;
+            font-size: x-large;
+            border: 2px solid rgb(0, 0, 0);
+            border-radius: 9px;
+            text-align: center;
+        }
+
+        .w_h {
+            width: 90px;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+            padding: 5px 10px;
+            font-size: x-large;
+            font-weight: bold;
+            background-color: aqua;
+            border: 2px solid rgb(255, 0, 0);
+            border-radius: 9px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 18px;
+        }
+
+        #image_box {
+            max-width: 100vw;
+        }
+
+        #image_box>img {
+            width: 100%;
+        }
+
+        @media only screen and (max-width:601px) {
+            .child {
+                flex-direction: column;
+                font-size: larger;
+                font-weight: bolder;
+                padding: 3px 0px;
+                margin: auto;
+                flex-wrap: nowrap;
+            }
+
+            input {
+                height: 24px;
+                font-size: large;
+                border: 2px solid rgb(0, 0, 0);
+                border-radius: 9px;
+                text-align: center;
+            }
+
+            .w_h {
+                margin-top: 6px;
+            }
+
+            button {
+                font-size: x-large;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <title>Image Downloader</title>
+</head>
+
+<body>
+    <div id="main_box">
+        <div class="child">
+            Enter title of Image <input type="text" value="Rain" id="title">
+        </div>
+        <div class="child">
+            <div class="grand_child">Width <input type="number" value="0" class="w_h" id="wid"></div>
+            <div class="grand_child">Height <input type="number" value="0" class="w_h" id="hei"></div>
+        </div>
+    </div>
+    <button onclick="getImage()">Get Image</button>
+    <div id="image_box">
+        <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="No Image Found" id="r_image">
+    </div>
+    <button>Save Image</button>
+
+
+    <script>
+        var i_box = document.getElementById("r_image");
+        function getImage() {
+            var text = document.getElementById("title").value;
+            var height = document.getElementById("hei").value;
+            var weidth = document.getElementById("wid").value;
+
+        }
+    </script>
+</body>
+
+</html>
