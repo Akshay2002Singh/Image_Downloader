@@ -10,7 +10,8 @@
             padding: 0px 0px;
             margin: 0px 0px;
             box-sizing: border-box;
-            /* border: 1px solid red; */
+            background-color: black;
+            color: wheat;
         }
 
         #main_box {
@@ -39,7 +40,7 @@
             height: 40px;
             margin-left: 9px;
             font-size: x-large;
-            border: 2px solid rgb(0, 0, 0);
+            border: 2px solid rgb(127, 242, 255);
             border-radius: 9px;
             text-align: center;
         }
@@ -55,8 +56,9 @@
             font-size: x-large;
             font-weight: bold;
             background-color: aqua;
-            border: 2px solid rgb(255, 0, 0);
+            border: 3px solid rgb(255, 0, 0);
             border-radius: 9px;
+            color: black;
             cursor: pointer;
             margin-top: 10px;
             margin-bottom: 18px;
@@ -67,7 +69,10 @@
         }
 
         #image_box>img {
-            width: 100%;
+            /* width: 100%; */
+            max-width: 100%;
+            display: block;
+            margin: auto;
         }
 
         @media only screen and (max-width:601px) {
@@ -108,24 +113,52 @@
             Enter title of Image <input type="text" value="Rain" id="title">
         </div>
         <div class="child">
-            <div class="grand_child">Width <input type="number" value="0" class="w_h" id="wid"></div>
-            <div class="grand_child">Height <input type="number" value="0" class="w_h" id="hei"></div>
+            <div class="grand_child">Width <input type="number" value="1600" class="w_h" id="wid"></div>
+            <div class="grand_child">Height <input type="number" value="900" class="w_h" id="hei"></div>
         </div>
     </div>
     <button onclick="getImage()">Get Image</button>
     <div id="image_box">
         <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="No Image Found" id="r_image">
     </div>
-    <button>Save Image</button>
+    <button onclick="save_image()">Save Image</button>
 
 
     <script>
         var i_box = document.getElementById("r_image");
+        var url = "";
         function getImage() {
+            i_box.src = "./1_e_Loq49BI4WmN7o9ItTADg.gif";
             var text = document.getElementById("title").value;
             var height = document.getElementById("hei").value;
             var weidth = document.getElementById("wid").value;
+            var api = `https://source.unsplash.com/${weidth}x${height}/?${text}`
+            // origin api 
+            // https://source.unsplash.com/1600x900/?nature,water
 
+            fetch(api).then((response) => {
+                return response.url;
+            }).then((data) => {
+                console.log(data)
+                url = data;
+                i_box.src = data;
+            })
+        }
+
+        function save_image() {
+            fetch(url)
+                .then(resp => resp.blob())
+                .then(blobobject => {
+                    const blob = window.URL.createObjectURL(blobobject);
+                    const anchor = document.createElement('a');
+                    anchor.style.display = 'none';
+                    anchor.href = blob;
+                    anchor.download = document.getElementById("title").value;
+                    document.body.appendChild(anchor);
+                    anchor.click();
+                    window.URL.revokeObjectURL(blob);
+                })
+                .catch(() => console.log('An error in downloadin gthe file sorry'));
         }
     </script>
 </body>
