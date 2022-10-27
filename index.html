@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * {
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <style> *{
             padding: 0px 0px;
             margin: 0px 0px;
             box-sizing: border-box;
@@ -49,7 +51,7 @@
             width: 90px;
         }
 
-        button {
+        .buttons{
             display: block;
             margin: auto;
             padding: 5px 10px;
@@ -74,8 +76,28 @@
             display: block;
             margin: auto;
         }
+        #maindiv{
+            display: none;
+        }
 
-        @media only screen and (max-width:601px) {
+        .image_rotate {
+            animation: rotation 1s;
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotateX(0deg);
+            }
+
+            to {
+                transform: rotateX(90deg);
+            }
+        }
+        #title{
+            margin-left: 15px;
+        }
+
+        @media only screen and (max-width:742px) {
             .child {
                 flex-direction: column;
                 font-size: larger;
@@ -88,9 +110,9 @@
             input {
                 height: 24px;
                 font-size: large;
-                border: 2px solid rgb(0, 0, 0);
                 border-radius: 9px;
                 text-align: center;
+                border: 2px solid rgb(127, 242, 255);
             }
 
             .w_h {
@@ -108,23 +130,51 @@
 </head>
 
 <body>
-    <div id="main_box">
-        <div class="child">
-            Enter title of Image <input type="text" value="Rain" id="title">
-        </div>
-        <div class="child">
-            <div class="grand_child">Width <input type="number" value="1600" class="w_h" id="wid"></div>
-            <div class="grand_child">Height <input type="number" value="900" class="w_h" id="hei"></div>
-        </div>
+    <!-- div for landing -->
+    <div class="absolute h-screen w-full bg-indigo-500 " id="div1">
+        <h1 class="text-7xl mt-40 sm:text-9xl font-mono italic font-black text-center align-middle sm:mt-24 bg-indigo-500">ELITE</h1>
+        <h1 class="text-4xl mb-2 sm:text-9xl font-mono italic font-black text-center align-middle sm:mb-4 bg-indigo-500">Image Downloader</h1>
+        <h1 class="text-xl sm:text-7xl font-mono italic font-black text-center align-middle bg-indigo-500">Lets Download Best Quality Images</h1>
     </div>
-    <button onclick="getImage()">Get Image</button>
-    <div id="image_box">
-        <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="No Image Found" id="r_image">
-    </div>
-    <button onclick="save_image()">Save Image</button>
 
+    
+    <!-- main content  -->
+    <div id="maindiv">
+        <div id="main_box">
+            <div class="child">
+                Enter title of Image <input type="text" value="Rain" id="title">
+            </div>
+            <div class="child">
+                <div class="grand_child">Width <input type="number" value="1600" class="w_h" id="wid"></div>
+                <div class="grand_child">Height <input type="number" value="900" class="w_h" id="hei"></div>
+            </div>
+        </div>
+        <button onclick="getImage()" class="buttons">Get Image</button>
+        <div id="image_box">
+            <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="No Image Found"
+                id="r_image">
+        </div>
+        <button onclick="save_image()" class="buttons">Save Image</button>
+
+    </div>
 
     <script>
+        // for Animation 
+        $(document).ready(function () {
+            setTimeout(() => {
+                $("#div1").addClass("image_rotate");
+            }, 1000);
+            // confirm("Yes");
+            setTimeout(() => {
+                $("#div1").hide();
+            }, 2000);
+            setTimeout(() => {
+                $("#div2").hide();
+                $("#maindiv").show();
+            }, 1700);
+        });
+
+
         var i_box = document.getElementById("r_image");
         var url = "";
         function getImage() {
