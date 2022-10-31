@@ -151,7 +151,7 @@
         </div>
         <button onclick="getImage()" class="buttons">Get Image</button>
         <div id="image_box">
-            <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="No Image Found"
+            <img src="./crop.gif" alt="No Image Found"
                 id="r_image">
         </div>
         <button onclick="save_image()" class="buttons">Save Image</button>
@@ -159,6 +159,7 @@
     </div>
 
     <script>
+        var i_box = document.getElementById("r_image");
         // for Animation 
         $(document).ready(function () {
             setTimeout(() => {
@@ -172,10 +173,11 @@
                 $("#div2").hide();
                 $("#maindiv").show();
             }, 1700);
+
+            i_box.src = "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg";
         });
 
 
-        var i_box = document.getElementById("r_image");
         var url = "";
         function getImage() {
             i_box.src = "./crop.gif";
